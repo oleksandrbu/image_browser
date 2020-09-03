@@ -3,10 +3,10 @@ using System.Collections.Generic;
 
 namespace image_browser{
     public class Title{
-        ulong Id {get; set;}
-        string Name  {get;set;}
-        DateTime Release {get;set;}
-        List<Character> Characters {get; set;}
+        public ulong Id {get; set;}
+        public string Name  {get;set;}
+        public DateTime Release {get;set;}
+        public List<Character> Characters;
         public Title(){
         }
     }

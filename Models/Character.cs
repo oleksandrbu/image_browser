@@ -2,10 +2,10 @@ using System.Collections.Generic;
 
 namespace image_browser{
     public class Character{
-        ulong Id {get; set;}
-        string Name  {get;set;}
-        uint Age {get;set;}
-        List<Title> Titles {get; set;}
+        public ulong Id {get; set;}
+        public string Name  {get;set;}
+        public uint Age {get;set;}
+        public List<Title> Titles;
         public Character(){
         }
     }

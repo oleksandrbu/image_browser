@@ -1,12 +1,12 @@
 namespace image_browser{
     public class Image{
-        ulong Id {get; set;}
-        string Path  {get;set;}
-        uint Width {get; set;}
-        uint Height {get;set;}
-        Filetype FiletypeId {get; set;}
-        Title TitleId {get; set;}
-        Character Characters {get; set;}
+        public ulong Id {get; set;}
+        public string Path  {get;set;}
+        public uint Width {get; set;}
+        public uint Height {get;set;}
+        public Filetype FiletypeId {get; set;}
+        public Title TitleId {get; set;}
+        public Character Characters;
         public Image(){
 
         }
