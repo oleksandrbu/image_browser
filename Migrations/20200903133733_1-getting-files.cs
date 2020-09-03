@@ -74,7 +74,7 @@ namespace image_browser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "TitleCharacter",
+                name: "TitleCharacters",
                 columns: table => new
                 {
                     TitleId = table.Column<decimal>(nullable: false),
@@ -82,15 +82,15 @@ namespace image_browser.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TitleCharacter", x => new { x.TitleId, x.CharacterId });
+                    table.PrimaryKey("PK_TitleCharacters", x => new { x.TitleId, x.CharacterId });
                     table.ForeignKey(
-                        name: "FK_TitleCharacter_Characters_CharacterId",
+                        name: "FK_TitleCharacters_Characters_CharacterId",
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_TitleCharacter_Titles_TitleId",
+                        name: "FK_TitleCharacters_Titles_TitleId",
                         column: x => x.TitleId,
                         principalTable: "Titles",
                         principalColumn: "Id",
@@ -98,7 +98,7 @@ namespace image_browser.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ImageCharacter",
+                name: "ImageCharacters",
                 columns: table => new
                 {
                     ImageId = table.Column<decimal>(nullable: false),
@@ -106,15 +106,15 @@ namespace image_browser.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ImageCharacter", x => new { x.ImageId, x.CharacterId });
+                    table.PrimaryKey("PK_ImageCharacters", x => new { x.ImageId, x.CharacterId });
                     table.ForeignKey(
-                        name: "FK_ImageCharacter_Characters_CharacterId",
+                        name: "FK_ImageCharacters_Characters_CharacterId",
                         column: x => x.CharacterId,
                         principalTable: "Characters",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ImageCharacter_Images_ImageId",
+                        name: "FK_ImageCharacters_Images_ImageId",
                         column: x => x.ImageId,
                         principalTable: "Images",
                         principalColumn: "Id",
@@ -122,8 +122,8 @@ namespace image_browser.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ImageCharacter_CharacterId",
-                table: "ImageCharacter",
+                name: "IX_ImageCharacters_CharacterId",
+                table: "ImageCharacters",
                 column: "CharacterId");
 
             migrationBuilder.CreateIndex(
@@ -137,18 +137,18 @@ namespace image_browser.Migrations
                 column: "TitleId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TitleCharacter_CharacterId",
-                table: "TitleCharacter",
+                name: "IX_TitleCharacters_CharacterId",
+                table: "TitleCharacters",
                 column: "CharacterId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ImageCharacter");
+                name: "ImageCharacters");
 
             migrationBuilder.DropTable(
-                name: "TitleCharacter");
+                name: "TitleCharacters");
 
             migrationBuilder.DropTable(
                 name: "Images");

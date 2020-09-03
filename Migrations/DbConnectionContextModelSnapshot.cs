@@ -2,18 +2,16 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using image_browser;
 
 namespace image_browser.Migrations
 {
-    [DbContext(typeof(MainContext))]
-    [Migration("20200903124317_1-getting-files")]
-    partial class _1gettingfiles
+    [DbContext(typeof(DbConnectionContext))]
+    partial class DbConnectionContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +92,7 @@ namespace image_browser.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("ImageCharacter");
+                    b.ToTable("ImageCharacters");
                 });
 
             modelBuilder.Entity("image_browser.Title", b =>
@@ -126,7 +124,7 @@ namespace image_browser.Migrations
 
                     b.HasIndex("CharacterId");
 
-                    b.ToTable("TitleCharacter");
+                    b.ToTable("TitleCharacters");
                 });
 
             modelBuilder.Entity("image_browser.Image", b =>
