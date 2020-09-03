@@ -1,6 +1,8 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace image_browser{
     public class Filetype{
-        public ulong Id {get; set;}
+        public long Id {get; set;}
         public string Type  {get;set;}
         public Filetype(){
         }

@@ -21,12 +21,13 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.Character", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<long>("Age")
-                        .HasColumnType("bigint");
+                    b.Property<int>("Age")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -38,9 +39,10 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.Filetype", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Type")
                         .HasColumnType("text");
@@ -52,24 +54,25 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.Image", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<decimal?>("FiletypeId")
-                        .HasColumnType("numeric(20,0)");
-
-                    b.Property<long>("Height")
+                    b.Property<long?>("FiletypeId")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("integer");
 
                     b.Property<string>("Path")
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("TitleId")
-                        .HasColumnType("numeric(20,0)");
-
-                    b.Property<long>("Width")
+                    b.Property<long?>("TitleId")
                         .HasColumnType("bigint");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
@@ -82,11 +85,11 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.ImageCharacter", b =>
                 {
-                    b.Property<decimal>("ImageId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("ImageId")
+                        .HasColumnType("bigint");
 
-                    b.Property<decimal>("CharacterId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("CharacterId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("ImageId", "CharacterId");
 
@@ -97,9 +100,10 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.Title", b =>
                 {
-                    b.Property<decimal>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("numeric(20,0)");
+                        .HasColumnType("bigint")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
                     b.Property<string>("Name")
                         .HasColumnType("text");
@@ -114,11 +118,11 @@ namespace image_browser.Migrations
 
             modelBuilder.Entity("image_browser.TitleCharacter", b =>
                 {
-                    b.Property<decimal>("TitleId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("TitleId")
+                        .HasColumnType("bigint");
 
-                    b.Property<decimal>("CharacterId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("CharacterId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("TitleId", "CharacterId");
 

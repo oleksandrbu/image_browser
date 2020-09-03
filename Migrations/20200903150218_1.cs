@@ -1,9 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace image_browser.Migrations
 {
-    public partial class _1gettingfiles : Migration
+    public partial class _1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,9 +12,10 @@ namespace image_browser.Migrations
                 name: "Characters",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
-                    Age = table.Column<long>(nullable: false)
+                    Age = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -24,7 +26,8 @@ namespace image_browser.Migrations
                 name: "Filetypes",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Type = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -36,7 +39,8 @@ namespace image_browser.Migrations
                 name: "Titles",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(nullable: true),
                     Release = table.Column<DateTime>(nullable: false)
                 },
@@ -49,12 +53,13 @@ namespace image_browser.Migrations
                 name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<decimal>(nullable: false),
+                    Id = table.Column<long>(nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Path = table.Column<string>(nullable: true),
-                    Width = table.Column<long>(nullable: false),
-                    Height = table.Column<long>(nullable: false),
-                    FiletypeId = table.Column<decimal>(nullable: true),
-                    TitleId = table.Column<decimal>(nullable: true)
+                    Width = table.Column<int>(nullable: false),
+                    Height = table.Column<int>(nullable: false),
+                    FiletypeId = table.Column<long>(nullable: true),
+                    TitleId = table.Column<long>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -77,8 +82,8 @@ namespace image_browser.Migrations
                 name: "TitleCharacters",
                 columns: table => new
                 {
-                    TitleId = table.Column<decimal>(nullable: false),
-                    CharacterId = table.Column<decimal>(nullable: false)
+                    TitleId = table.Column<long>(nullable: false),
+                    CharacterId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -101,8 +106,8 @@ namespace image_browser.Migrations
                 name: "ImageCharacters",
                 columns: table => new
                 {
-                    ImageId = table.Column<decimal>(nullable: false),
-                    CharacterId = table.Column<decimal>(nullable: false)
+                    ImageId = table.Column<long>(nullable: false),
+                    CharacterId = table.Column<long>(nullable: false)
                 },
                 constraints: table =>
                 {

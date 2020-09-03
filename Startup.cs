@@ -20,6 +20,7 @@ namespace image_browser
         {
             services.AddControllers();
             services.AddDbContext<DbConnectionContext>();
+            services.AddScoped<ImageService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
