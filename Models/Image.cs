@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace image_browser{
     public class Image{
@@ -6,17 +7,10 @@ namespace image_browser{
         public string Path  {get;set;}
         public uint Width {get; set;}
         public uint Height {get;set;}
-        public uint FiletypeId {get; set;}
-        public uint TitleId {get; set;}
-        public uint CharactersId {get; set;}
-        [NotMapped]
         public Filetype Filetype {get; set;}
-        [NotMapped]
         public Title Title {get; set;}
-        [NotMapped]
-        public Character Characters;
+        public List<ImageCharacter> ImageCharacters {get; set;}
         public Image(){
-
         }
     }
 }

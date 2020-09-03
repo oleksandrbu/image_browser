@@ -7,8 +7,7 @@ namespace image_browser{
         public ulong Id {get; set;}
         public string Name  {get;set;}
         public DateTime Release {get;set;}
-        [NotMapped]
-        public List<Character> Characters;
+        public List<TitleCharacter> TitleCharacters {get; set;}
         public Title(){
         }
     }

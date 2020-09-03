@@ -6,9 +6,7 @@ namespace image_browser{
         public ulong Id {get; set;}
         public string Name  {get;set;}
         public uint Age {get;set;}
-        [NotMapped]
-        public List<Title> Titles;
-        public Character(){
-        }
+        public List<TitleCharacter> TitleCharacters {get; set;}
+        public List<ImageCharacter> ImageCharacters {get; set;}
     }
 }
