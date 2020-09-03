@@ -10,8 +10,8 @@ using image_browser;
 namespace image_browser.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20200903064642_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20200903072905_1-getting-files")]
+    partial class _1gettingfiles
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -58,8 +58,11 @@ namespace image_browser.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("numeric(20,0)");
 
-                    b.Property<decimal?>("FiletypeIdId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("CharactersId")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("FiletypeId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("Height")
                         .HasColumnType("bigint");
@@ -67,17 +70,13 @@ namespace image_browser.Migrations
                     b.Property<string>("Path")
                         .HasColumnType("text");
 
-                    b.Property<decimal?>("TitleIdId")
-                        .HasColumnType("numeric(20,0)");
+                    b.Property<long>("TitleId")
+                        .HasColumnType("bigint");
 
                     b.Property<long>("Width")
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FiletypeIdId");
-
-                    b.HasIndex("TitleIdId");
 
                     b.ToTable("Images");
                 });
@@ -97,17 +96,6 @@ namespace image_browser.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Titles");
-                });
-
-            modelBuilder.Entity("image_browser.Image", b =>
-                {
-                    b.HasOne("image_browser.Filetype", "FiletypeId")
-                        .WithMany()
-                        .HasForeignKey("FiletypeIdId");
-
-                    b.HasOne("image_browser.Title", "TitleId")
-                        .WithMany()
-                        .HasForeignKey("TitleIdId");
                 });
 #pragma warning restore 612, 618
         }
