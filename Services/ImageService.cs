@@ -28,13 +28,17 @@ namespace image_browser{
                             .ToList();
         }
         public void Delete(long id){
-            db.Images.Remove(db.Images.FirstOrDefault(p => p.Id == id));
-            db.SaveChanges();
+            Image which = db.Images.FirstOrDefault(p => p.Id == id);
+            if (which != null){
+                db.Images.Remove(which);
+                db.SaveChanges();
+            }
         }
-        public List<ImageCharacter> AddCharacters(List<ImageCharacter> characters){
-            db.ImageCharacters.AddRange(characters);
+        public ImageCharacter AddCharacters(long id, long character){
+            ImageCharacter newCharacters = new ImageCharacter(id, character);
+            db.ImageCharacters.Add(newCharacters);
             db.SaveChanges();
-            return characters;
+            return newCharacters;
         }
     }
 }

@@ -26,5 +26,15 @@ namespace image_browser{
         public void AddTask(List<Image> images){
             _imageService.Add(images);
         }
+        
+        [HttpDelete("{id}")]
+        public void Delete(long id){
+            _imageService.Delete(id);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult AddCharacters(long id, long characterId){
+            return new JsonResult(_imageService.AddCharacters(id, characterId));
+        }
     }
  }
