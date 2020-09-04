@@ -36,5 +36,18 @@ namespace image_browser{
         public IActionResult AddCharacters(long id, long characterId){
             return new JsonResult(_imageService.AddCharacters(id, characterId));
         }
+
+        [HttpGet("search")]
+        public IActionResult Search(long? width = null, 
+                                    long? minWidth = null, 
+                                    long? maxWidth = null,
+                                    long? height= null,
+                                    long? minHeight = null,
+                                    long? maxHeight = null, 
+                                    long? filetype = null)
+        {
+            return new JsonResult(_imageService.Search(width, minWidth, maxWidth, height, minHeight, maxHeight, filetype));
+
+        }
     }
  }
