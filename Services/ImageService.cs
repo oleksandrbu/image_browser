@@ -14,10 +14,10 @@ namespace image_browser{
             db.SaveChanges();
         }
         public Image GetById(long id){
-            return db.Images/*.Include(f => f.Filetype)
+            return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
                             .Include(i => i.ImageCharacters)
-                            .ThenInclude(ic => ic.Character)*/
+                            .ThenInclude(ic => ic.Character)
                             .FirstOrDefault(c => c.Id == id);
         }
         public List<Image> GetAll(){
@@ -26,6 +26,15 @@ namespace image_browser{
                             .Include(i => i.ImageCharacters)
                             .ThenInclude(ic => ic.Character)*/
                             .ToList();
+        }
+        public void Delete(long id){
+            db.Images.Remove(db.Images.FirstOrDefault(p => p.Id == id));
+            db.SaveChanges();
+        }
+        public List<ImageCharacter> AddCharacters(List<ImageCharacter> characters){
+            db.ImageCharacters.AddRange(characters);
+            db.SaveChanges();
+            return characters;
         }
     }
 }
