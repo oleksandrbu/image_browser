@@ -17,6 +17,19 @@ namespace image_browser{
         }
         public List<Title> GetAll(){
             return db.Titles.ToList();
+        }
+        public void Delete(long id){
+            Title which = db.Titles.FirstOrDefault(p => p.Id == id);
+            if (which != null){
+                db.Titles.Remove(which);
+                db.SaveChanges();
+            }
+        }
+        public TitleCharacter AddCharacters(long id, long character){
+            TitleCharacter newCharacters = new TitleCharacter(id, character);
+            db.TitleCharacters.Add(newCharacters);
+            db.SaveChanges();
+            return newCharacters;
         }   
     }
 }
