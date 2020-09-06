@@ -25,7 +25,7 @@ namespace image_browser{
                 db.SaveChanges();
             }
         }
-        public TitleCharacter AddCharacters(long id, long character){
+        public TitleCharacter AddCharacter(long id, long character){
             TitleCharacter newCharacters = new TitleCharacter(id, character);
             db.TitleCharacters.Add(newCharacters);
             db.SaveChanges();
