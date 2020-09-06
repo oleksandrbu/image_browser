@@ -32,7 +32,7 @@ namespace image_browser{
         }
 
         [HttpPatch("{id}")]
-        public IActionResult AddCharacters(long id, long characterId){
+        public IActionResult AddCharacters(long id,[FromForm] long characterId){
             return new JsonResult(_imageService.AddCharacters(id, characterId));
         }
 

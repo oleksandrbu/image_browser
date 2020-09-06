@@ -26,9 +26,13 @@ namespace image_browser{
             }
         }
         public TitleCharacter AddCharacter(long id, long character){
-            TitleCharacter newCharacters = new TitleCharacter(id, character);
-            db.TitleCharacters.Add(newCharacters);
-            db.SaveChanges();
+            TitleCharacter newCharacters = null;
+            if (db.Titles.FirstOrDefault(c => c.Id == id) != null && db.Characters.FirstOrDefault(c => c.Id == id) != null){
+                newCharacters = new TitleCharacter(id, character);
+                db.TitleCharacters.Add(newCharacters);
+                db.SaveChanges();
+            }
+
             return newCharacters;
         }   
     }

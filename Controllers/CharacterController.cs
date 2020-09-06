@@ -32,7 +32,7 @@ namespace image_browser{
         }
 
         [HttpPatch("{id}")]
-        public IActionResult Patch(long id, int age){
+        public IActionResult Patch(long id,[FromForm] int age){
             return new JsonResult(_characterService.Patch(id, age));
         }
     }

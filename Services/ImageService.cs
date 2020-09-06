@@ -20,10 +20,10 @@ namespace image_browser{
                             .FirstOrDefault(c => c.Id == id);
         }
         public List<Image> GetAll(){
-            return db.Images/*.Include(f => f.Filetype)
+            return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
                             .Include(i => i.ImageCharacters)
-                            .ThenInclude(ic => ic.Character)*/
+                            .ThenInclude(ic => ic.Character)
                             .ToList();
         }
         public void Delete(long id){
@@ -34,9 +34,12 @@ namespace image_browser{
             }
         }
         public ImageCharacter AddCharacters(long id, long character){
-            ImageCharacter newCharacters = new ImageCharacter(id, character);
-            db.ImageCharacters.Add(newCharacters);
-            db.SaveChanges();
+            ImageCharacter newCharacters = null;
+            if (db.Images.FirstOrDefault(c => c.Id == id) != null && db.Characters.FirstOrDefault(c => c.Id == character) != null){
+                newCharacters = new ImageCharacter(id, character);
+                db.ImageCharacters.Add(newCharacters);
+                db.SaveChanges();
+            }
             return newCharacters;
         }
         public List<Image> Search(long? width, long? minWidth, long? maxWidth, long? height, long? minHeight, long? maxHeight, long? filetype){
