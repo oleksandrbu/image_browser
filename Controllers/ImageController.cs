@@ -47,7 +47,6 @@ namespace image_browser{
                                     long? filetype = null)
         {
             return new JsonResult(_imageService.Search(width, minWidth, maxWidth, height, minHeight, maxHeight, filetype));
-
         }
     }
  }
