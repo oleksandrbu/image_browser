@@ -41,5 +41,9 @@ namespace image_browser{
         {
             return new JsonResult(_imageService.Search(search));
         }
+        [HttpGet("{id}/characters")]
+        public IActionResult GetCharacters(long id){
+            return new JsonResult(_imageService.GetCharacters(id));
+        }
     }
  }

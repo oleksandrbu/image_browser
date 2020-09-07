@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace image_browser{
     public class Image{
@@ -9,6 +10,7 @@ namespace image_browser{
         public int Height {get;set;}
         public Filetype Filetype {get; set;}
         public Title Title {get; set;}
+        [JsonIgnore]
         public List<ImageCharacter> ImageCharacters {get; set;}
         public Image(){
         }

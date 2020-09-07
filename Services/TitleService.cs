@@ -13,10 +13,7 @@ namespace image_browser{
             db.SaveChanges();
         }
         public Title GetById(long id){
-            return db.Titles
-                     .Include(c => c.TitleCharacters)
-                     .ThenInclude(c => c.Character)
-                     .FirstOrDefault(c => c.Id == id);
+            return db.Titles.FirstOrDefault(c => c.Id == id);
         }
         public List<Title> GetAll(){
             return db.Titles.ToList();

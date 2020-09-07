@@ -21,8 +21,6 @@ namespace image_browser{
         public Image GetById(long id){
             return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
-                            .Include(t => t.ImageCharacters)
-                            .ThenInclude(c => c.Character)
                             .FirstOrDefault(c => c.Id == id);
         }
         public List<Image> GetAll(){
@@ -65,6 +63,17 @@ namespace image_browser{
             }
 
             return images.ToList();
+        }
+        public List<Character> GetCharacters(long id){
+            db.Characters.Load();
+            List<Character> charList = new List<Character>();
+            List<ImageCharacter> imCharList = db.ImageCharacters.Where(p => p.ImageId == id).ToList();
+            if (imCharList != null){
+                foreach (ImageCharacter character in imCharList){
+                    charList.Add(character.Character);
+                }
+            }   
+            return charList;
         }
     }
 }
