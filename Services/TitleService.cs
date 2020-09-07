@@ -45,6 +45,11 @@ namespace image_browser{
                 }
             }   
             return charList;
-        }   
+        }
+        public List<Image> GetImages(long id){
+            db.Images.Load();
+            List<Image> imList = db.Images.Where(p => p.Title.Id == id).ToList();
+            return imList;
+        }      
     }
 }

@@ -37,5 +37,9 @@ namespace image_browser{
         public IActionResult GetCharacters(long id){
             return new JsonResult(_titleService.GetCharacters(id));
         }
+        [HttpGet("{id}/images")]
+        public IActionResult GetImages(long id){
+            return new JsonResult(_titleService.GetImages(id));
+        }
     }
  }
