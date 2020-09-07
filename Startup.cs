@@ -23,6 +23,7 @@ namespace image_browser
             services.AddScoped<ImageService>();
             services.AddScoped<TitleService>();
             services.AddScoped<CharacterService>();
+            services.AddScoped<FiletypeService>();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
