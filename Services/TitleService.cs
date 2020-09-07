@@ -34,6 +34,17 @@ namespace image_browser{
             }
 
             return newCharacters;
+        }
+        public List<Character> GetCharacters(long id){
+            db.Characters.Load();
+            List<Character> charList = new List<Character>();
+            List<TitleCharacter> imCharList = db.TitleCharacters.Where(p => p.TitleId == id).ToList();
+            if (imCharList != null){
+                foreach (TitleCharacter character in imCharList){
+                    charList.Add(character.Character);
+                }
+            }   
+            return charList;
         }   
     }
 }
