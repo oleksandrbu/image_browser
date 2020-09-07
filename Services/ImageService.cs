@@ -8,22 +8,26 @@ namespace image_browser{
         public ImageService(DbConnectionContext dbConnectionContext){
             db = dbConnectionContext;
         }
-        public void Add(List<Image> images){
-            db.Images.AddRange(images);
+        public void Add(List<ImageDTO> images){
+            List<Image> newImages = new List<Image>();
+            foreach (var im in images){
+                Filetype type = db.Filetypes.FirstOrDefault(c => c.Id == im.FiletypeId);
+                Title title = db.Titles.FirstOrDefault(c => c.Id == im.TitleId);
+                newImages.Add(new Image(im, type, title));
+            }
+            db.Images.AddRange(newImages);
             db.SaveChanges();
         }
         public Image GetById(long id){
             return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
-                            .Include(i => i.ImageCharacters)
-                            .ThenInclude(ic => ic.Character)
+                            .Include(t => t.ImageCharacters)
+                            .ThenInclude(c => c.Character)
                             .FirstOrDefault(c => c.Id == id);
         }
         public List<Image> GetAll(){
             return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
-                            .Include(i => i.ImageCharacters)
-                            .ThenInclude(ic => ic.Character)
                             .ToList();
         }
         public void Delete(long id){
@@ -42,22 +46,22 @@ namespace image_browser{
             }
             return newCharacters;
         }
-        public List<Image> Search(long? width, long? minWidth, long? maxWidth, long? height, long? minHeight, long? maxHeight, long? filetype){
+        public List<Image> Search(ImageSearch search){
             IEnumerable<Image> images = db.Images.ToList();
-            if (filetype != null){
-                images = images.Where(p => p.Filetype.Id == filetype);
+            if (search.filetype.HasValue){
+                images = images.Where(p => p.Filetype.Id == search.filetype);
             }
-            if (width != null){
-                images = images.Where(p => p.Width == width);
+            if (search.width.HasValue){
+                images = images.Where(p => p.Width == search.width);
             } else {
-                if (minWidth != null) images = images.Where(p => p.Width >= minWidth);
-                if (maxWidth != null) images = images.Where(p => p.Width >= maxWidth);
+                if (search.minWidth.HasValue) images = images.Where(p => p.Width >= search.minWidth);
+                if (search.maxWidth.HasValue) images = images.Where(p => p.Width >= search.maxWidth);
             }
-            if (height != null){
-                images = images.Where(p => p.Height == height);
+            if (search.height.HasValue){
+                images = images.Where(p => p.Height == search.height);
             } else {
-                if (minHeight != null) images = images.Where(p => p.Height >= minHeight);
-                if (maxHeight != null) images = images.Where(p => p.Width >= maxHeight);
+                if (search.minHeight.HasValue) images = images.Where(p => p.Height >= search.minHeight);
+                if (search.maxHeight.HasValue) images = images.Where(p => p.Width >= search.maxHeight);
             }
 
             return images.ToList();
