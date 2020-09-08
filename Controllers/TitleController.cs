@@ -30,7 +30,7 @@ namespace image_browser{
             _titleService.Delete(id);
         }
         [HttpPatch("{id}")]
-        public IActionResult AddCharacter(long id, long characterId){
+        public IActionResult AddCharacter(long id,[FromForm] long characterId){
             return new JsonResult(_titleService.AddCharacter(id, characterId));
         }
     }

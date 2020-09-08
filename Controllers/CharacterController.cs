@@ -25,5 +25,15 @@ namespace image_browser{
         public void AddTask(List<Character> characters){
             _characterService.Add(characters);
         }
+        
+        [HttpDelete("{id}")]
+        public void Delete(long id){
+            _characterService.Delete(id);
+        }
+
+        [HttpPatch("{id}")]
+        public IActionResult Patch(long id,[FromForm] int age){
+            return new JsonResult(_characterService.Patch(id, age));
+        }
     }
  }

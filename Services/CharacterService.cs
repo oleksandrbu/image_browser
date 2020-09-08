@@ -1,4 +1,3 @@
-
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,17 +19,13 @@ namespace image_browser{
             return db.Characters.ToList();
         }
         public void Delete(long id){
-            Character which = db.Characters.FirstOrDefault(p => p.Id == id);
-            if (which != null){
-                db.Characters.Remove(which);
-                db.SaveChanges();
-            }
+            db.Characters.FirstOrDefault(c => c.Id == id);
         }
-        public TitleCharacter AddCharacter(long id, long character){
-            TitleCharacter newCharacters = new TitleCharacter(id, character);
-            db.TitleCharacters.Add(newCharacters);
+        public Character Patch(long id, int newAge){
+            Character character = db.Characters.FirstOrDefault(c => c.Id == id);
+            character.Age = newAge;
             db.SaveChanges();
-            return newCharacters;
+            return character;
         }
     }
 }
