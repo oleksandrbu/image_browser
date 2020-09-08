@@ -40,5 +40,25 @@ namespace image_browser{
             db.SaveChanges();
             return newCharacters;
         }
+        public List<Image> Search(long? width, long? minWidth, long? maxWidth, long? height, long? minHeight, long? maxHeight, long? filetype){
+            IEnumerable<Image> images = db.Images.ToList();
+            if (filetype != null){
+                images = images.Where(p => p.Filetype.Id == filetype);
+            }
+            if (width != null){
+                images = images.Where(p => p.Width == width);
+            } else {
+                if (minWidth != null) images = images.Where(p => p.Width >= minWidth);
+                if (maxWidth != null) images = images.Where(p => p.Width >= maxWidth);
+            }
+            if (height != null){
+                images = images.Where(p => p.Height == height);
+            } else {
+                if (minHeight != null) images = images.Where(p => p.Height >= minHeight);
+                if (maxHeight != null) images = images.Where(p => p.Width >= maxHeight);
+            }
+
+            return images.ToList();
+        }
     }
 }
