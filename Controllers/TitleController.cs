@@ -12,7 +12,7 @@ namespace image_browser{
         }
 
         [HttpGet("")]
-        public IActionResult AllTitle(){
+        public IActionResult AllTitles(){
             return new JsonResult(_titleService.GetAll());
         }
 
