@@ -8,5 +8,9 @@ namespace image_browser{
         public Character Character {get; set;}
         public ImageCharacter(){
         }
+        public ImageCharacter(long i, long c){
+            ImageId = i;
+            CharacterId = c;
+        }
     }
 }

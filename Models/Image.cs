@@ -11,6 +11,12 @@ namespace image_browser{
         public Title Title {get; set;}
         public List<ImageCharacter> ImageCharacters {get; set;}
         public Image(){
+            Path = "";
+            Width = 0;
+            Height = 0;
+            Filetype = null;
+            Title = null;
+            ImageCharacters = null;
         }
     }
 }
