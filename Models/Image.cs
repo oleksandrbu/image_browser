@@ -24,7 +24,7 @@ namespace image_browser{
     }
 
     public class ImageDTO{
-                public long Id {get; set;}
+        public long Id {get; set;}
         public string Path  {get;set;}
         public int Width {get; set;}
         public int Height {get;set;}
@@ -43,5 +43,7 @@ namespace image_browser{
         public long? minHeight {get; set;} 
         public long? maxHeight {get; set;} 
         public long? filetype {get; set;}
+        public long? titleId {get; set;}
+        public long? characterId {get; set;}
     }
 }

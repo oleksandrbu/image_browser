@@ -19,7 +19,11 @@ namespace image_browser{
             return db.Characters.ToList();
         }
         public void Delete(long id){
-            db.Characters.FirstOrDefault(c => c.Id == id);
+            Character which = db.Characters.FirstOrDefault(c => c.Id == id);
+            if (which != null){
+                db.Characters.Remove(which);
+                db.SaveChanges();
+            }
         }
         public Character Patch(long id, int newAge){
             Character character = db.Characters.FirstOrDefault(c => c.Id == id);
