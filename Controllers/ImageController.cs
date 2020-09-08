@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 
@@ -47,7 +46,6 @@ namespace image_browser{
                                     long? filetype = null)
         {
             return new JsonResult(_imageService.Search(width, minWidth, maxWidth, height, minHeight, maxHeight, filetype));
-
         }
     }
  }
