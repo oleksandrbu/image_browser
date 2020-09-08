@@ -22,7 +22,7 @@ namespace image_browser{
         }
 
         [HttpPost("")]
-        public void AddTask(List<Image> images){
+        public void AddTask(List<ImageDTO> images){
             _imageService.Add(images);
         }
         
@@ -37,15 +37,9 @@ namespace image_browser{
         }
 
         [HttpGet("search")]
-        public IActionResult Search(long? width = null, 
-                                    long? minWidth = null, 
-                                    long? maxWidth = null,
-                                    long? height= null,
-                                    long? minHeight = null,
-                                    long? maxHeight = null, 
-                                    long? filetype = null)
+        public IActionResult Search([FromQuery] ImageSearch search)
         {
-            return new JsonResult(_imageService.Search(width, minWidth, maxWidth, height, minHeight, maxHeight, filetype));
+            return new JsonResult(_imageService.Search(search));
         }
     }
  }
