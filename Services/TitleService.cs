@@ -13,10 +13,7 @@ namespace image_browser{
             db.SaveChanges();
         }
         public Title GetById(long id){
-            return db.Titles
-                     .Include(c => c.TitleCharacters)
-                     .ThenInclude(c => c.Character)
-                     .FirstOrDefault(c => c.Id == id);
+            return db.Titles.FirstOrDefault(c => c.Id == id);
         }
         public List<Title> GetAll(){
             return db.Titles.ToList();
@@ -37,6 +34,22 @@ namespace image_browser{
             }
 
             return newCharacters;
-        }   
+        }
+        public List<Character> GetCharacters(long id){
+            db.Characters.Load();
+            List<Character> charList = new List<Character>();
+            List<TitleCharacter> imCharList = db.TitleCharacters.Where(p => p.TitleId == id).ToList();
+            if (imCharList != null){
+                foreach (TitleCharacter character in imCharList){
+                    charList.Add(character.Character);
+                }
+            }   
+            return charList;
+        }
+        public List<Image> GetImages(long id){
+            db.Images.Load();
+            List<Image> imList = db.Images.Where(p => p.Title.Id == id).ToList();
+            return imList;
+        }      
     }
 }

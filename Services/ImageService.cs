@@ -21,8 +21,6 @@ namespace image_browser{
         public Image GetById(long id){
             return db.Images.Include(f => f.Filetype)
                             .Include(t => t.Title)
-                            .Include(t => t.ImageCharacters)
-                            .ThenInclude(c => c.Character)
                             .FirstOrDefault(c => c.Id == id);
         }
         public List<Image> GetAll(){
@@ -47,9 +45,31 @@ namespace image_browser{
             return newCharacters;
         }
         public List<Image> Search(ImageSearch search){
-            IEnumerable<Image> images = db.Images.ToList();
+            IEnumerable<Image> images;
+            if (search.characterId.HasValue){
+                List<Image> imageList = new List<Image>();
+                foreach (ImageCharacter im in db.ImageCharacters.Where(p => p.CharacterId == search.characterId).ToList()){
+                    imageList.Add(db.Images
+                                    .Include(p => p.Title)
+                                    .Include(p => p.Filetype)
+                                    .Include(p => p.ImageCharacters)
+                                    .ThenInclude(p => p.Character)
+                                    .FirstOrDefault(p => p.Id == im.ImageId));
+                }
+                images = imageList;
+            } else {
+                images = db.Images
+                            .Include(p => p.Title)
+                            .Include(p => p.Filetype)
+                            .Include(p => p.ImageCharacters)
+                            .ThenInclude(p => p.Character)
+                            .ToList();
+            }
+            if (search.titleId.HasValue){
+                images = images.Where(p => { if (p.Title != null) return p.Title.Id == search.titleId; else return false;});
+            }
             if (search.filetype.HasValue){
-                images = images.Where(p => p.Filetype.Id == search.filetype);
+                images = images.Where(p => { if (p.Filetype != null) return p.Filetype.Id == search.filetype; else return false;});
             }
             if (search.width.HasValue){
                 images = images.Where(p => p.Width == search.width);
@@ -65,6 +85,17 @@ namespace image_browser{
             }
 
             return images.ToList();
+        }
+        public List<Character> GetCharacters(long id){
+            db.Characters.Load();
+            List<Character> charList = new List<Character>();
+            List<ImageCharacter> imCharList = db.ImageCharacters.Where(p => p.ImageId == id).ToList();
+            if (imCharList != null){
+                foreach (ImageCharacter character in imCharList){
+                    charList.Add(character.Character);
+                }
+            }   
+            return charList;
         }
     }
 }

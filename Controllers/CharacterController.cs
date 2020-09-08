@@ -35,5 +35,13 @@ namespace image_browser{
         public IActionResult Patch(long id,[FromForm] int age){
             return new JsonResult(_characterService.Patch(id, age));
         }
+        [HttpGet("{id}/images")]
+        public IActionResult GetImages(long id){
+            return new JsonResult(_characterService.GetImages(id));
+        }
+        [HttpGet("{id}/titles")]
+        public IActionResult GetTitles(long id){
+            return new JsonResult(_characterService.GetTitles(id));
+        }
     }
  }

@@ -33,5 +33,13 @@ namespace image_browser{
         public IActionResult AddCharacter(long id,[FromForm] long characterId){
             return new JsonResult(_titleService.AddCharacter(id, characterId));
         }
+        [HttpGet("{id}/characters")]
+        public IActionResult GetCharacters(long id){
+            return new JsonResult(_titleService.GetCharacters(id));
+        }
+        [HttpGet("{id}/images")]
+        public IActionResult GetImages(long id){
+            return new JsonResult(_titleService.GetImages(id));
+        }
     }
  }
